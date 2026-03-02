@@ -1,15 +1,8 @@
 import { Text, View } from "react-native";
-
-export default function Profile() {
+export default function InfoForm() {
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text>Edit app/profile.tsx to edit this screen.</Text>
+    <View>
+      <Text>Info Form - Veritys Page</Text>
     </View>
   );
 }
