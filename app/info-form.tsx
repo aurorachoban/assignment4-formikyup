@@ -1,5 +1,5 @@
 import { Formik } from "formik";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, TextInput, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as Yup from "yup";
 
@@ -45,11 +45,17 @@ export default function InfoForm() {
         <View style={styles.header}>
           <Text style={styles.headerText}>Employee Information Form</Text>
         </View>
-        <Formik initialValues={initialValues} validationSchema={infoSchema}>
-          {{
-            values,
-            errors,
-          }}
+        <Formik
+          initialValues={initialValues}
+          validationSchema={infoSchema}
+          onSubmit={(values) => console.log(values)}
+        >
+          {({ values }) => (
+            <View>
+              <Text>First Name:</Text>
+              <TextInput placeholder="First name" value={values.firstName} />
+            </View>
+          )}
         </Formik>
       </View>
     </SafeAreaView>
