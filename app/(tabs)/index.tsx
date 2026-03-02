@@ -1,3 +1,4 @@
+
 import { useRouter } from "expo-router";
 import { StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -20,4 +21,4 @@ export default function Index() {
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({})
