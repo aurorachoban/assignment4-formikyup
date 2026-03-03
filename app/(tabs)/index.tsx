@@ -1,9 +1,23 @@
-import { Text, View } from "react-native";
+import { useRouter } from "expo-router";
+import { StyleSheet, Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import Button from "../ui/components/Button";
 
 export default function Index() {
+  const router = useRouter();
   return (
-    <View>
-      <Text>HEllo</Text>
-    </View>
+    <SafeAreaView>
+      <View>
+        <Text>Sign In</Text>
+        <Button
+          text="Sign In"
+          textColor="black"
+          bgColor="pink"
+          onPress={() => router.push("/info-form")}
+        ></Button>
+      </View>
+    </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({});
