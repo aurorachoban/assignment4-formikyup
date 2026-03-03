@@ -70,7 +70,7 @@ export default function SignUpScreen() {
           <Text style={styles.label}>Full Name</Text>
           <TextInput
             style={styles.input}
-            placeholder="Jane Doe"
+            placeholder="Austin Powers"
             autoCapitalize="words"
             value={values.fullName}
             onChangeText={handleChange("fullName")}
@@ -81,7 +81,7 @@ export default function SignUpScreen() {
           <Text style={styles.label}>Email</Text>
           <TextInput
             style={styles.input}
-            placeholder="jane@example.com"
+            placeholder="austin.powers@example.com"
             autoCapitalize="none"
             keyboardType="email-address"
             value={values.email}
@@ -93,7 +93,7 @@ export default function SignUpScreen() {
           <Text style={styles.label}>Password</Text>
           <TextInput
             style={styles.input}
-            placeholder="Min. 8 characters"
+            placeholder="min. 8 characters"
             secureTextEntry
             value={values.password}
             onChangeText={handleChange("password")}

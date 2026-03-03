@@ -23,7 +23,7 @@ export default function TabLayout() {
       />
 
       <Tabs.Screen
-        name="sign-up"
+        name="signUp"
         options={{
           tabBarIcon: ({ color }) => (
             <Feather name="user-plus" size={24} color={color} />

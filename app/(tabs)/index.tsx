@@ -13,7 +13,7 @@ export default function Index() {
           text="Sign In"
           textColor="black"
           bgColor="pink"
-          onPress={() => router.push("/info-form")}
+          onPress={() => router.push("/infoForm")}
         ></Button>
       </View>
     </SafeAreaView>
