@@ -7,6 +7,7 @@ import {
   TextInput,
   View,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import * as Yup from "yup";
 import FormError from "../ui/components/FormError";
 
@@ -42,96 +43,102 @@ const initialValues: SignUpValues = {
 
 export default function SignUpScreen() {
   return (
-    <Formik
-      initialValues={initialValues}
-      validationSchema={signUpSchema}
-      onSubmit={async (values, { setStatus }) => {
-        setStatus(undefined);
-        try {
-          console.log("Signed up!", values);
-        } catch (err) {
-          setStatus("Something went wrong. Please try again.");
-        }
-      }}
-    >
-      {({
-        values,
-        errors,
-        touched,
-        handleChange,
-        handleBlur,
-        handleSubmit,
-        isSubmitting,
-        status,
-      }) => (
-        <View style={styles.container}>
-          <Text style={styles.title}>Create Account</Text>
+    <SafeAreaView style={{ flex: 1 }}>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={signUpSchema}
+        onSubmit={async (values, { setStatus }) => {
+          setStatus(undefined);
+          try {
+            console.log("Signed up!", values);
+          } catch (err) {
+            setStatus("Something went wrong. Please try again.");
+          }
+        }}
+      >
+        {({
+          values,
+          errors,
+          touched,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          isSubmitting,
+          status,
+        }) => (
+          <View style={styles.container}>
+            <Text style={styles.title}>Create Account</Text>
 
-          <Text style={styles.label}>Full Name</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Austin Powers"
-            autoCapitalize="words"
-            value={values.fullName}
-            onChangeText={handleChange("fullName")}
-            onBlur={handleBlur("fullName")}
-          />
-          <FormError message={touched.fullName ? errors.fullName : undefined} />
+            <Text style={styles.label}>Full Name</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Austin Powers"
+              autoCapitalize="words"
+              value={values.fullName}
+              onChangeText={handleChange("fullName")}
+              onBlur={handleBlur("fullName")}
+            />
+            <FormError
+              message={touched.fullName ? errors.fullName : undefined}
+            />
 
-          <Text style={styles.label}>Email</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="austin.powers@example.com"
-            autoCapitalize="none"
-            keyboardType="email-address"
-            value={values.email}
-            onChangeText={handleChange("email")}
-            onBlur={handleBlur("email")}
-          />
-          <FormError message={touched.email ? errors.email : undefined} />
+            <Text style={styles.label}>Email</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="austin.powers@example.com"
+              autoCapitalize="none"
+              keyboardType="email-address"
+              value={values.email}
+              onChangeText={handleChange("email")}
+              onBlur={handleBlur("email")}
+            />
+            <FormError message={touched.email ? errors.email : undefined} />
 
-          <Text style={styles.label}>Password</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="min. 8 characters"
-            secureTextEntry
-            value={values.password}
-            onChangeText={handleChange("password")}
-            onBlur={handleBlur("password")}
-          />
-          <FormError message={touched.password ? errors.password : undefined} />
+            <Text style={styles.label}>Password</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="min. 8 characters"
+              secureTextEntry
+              value={values.password}
+              onChangeText={handleChange("password")}
+              onBlur={handleBlur("password")}
+            />
+            <FormError
+              message={touched.password ? errors.password : undefined}
+            />
 
-          <Text style={styles.label}>Confirm Password</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Re-enter your password"
-            secureTextEntry
-            value={values.confirmPassword}
-            onChangeText={handleChange("confirmPassword")}
-            onBlur={handleBlur("confirmPassword")}
-          />
-          <FormError
-            message={
-              touched.confirmPassword ? errors.confirmPassword : undefined
-            }
-          />
+            <Text style={styles.label}>Confirm Password</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Re-enter your password"
+              secureTextEntry
+              value={values.confirmPassword}
+              onChangeText={handleChange("confirmPassword")}
+              onBlur={handleBlur("confirmPassword")}
+            />
+            <FormError
+              message={
+                touched.confirmPassword ? errors.confirmPassword : undefined
+              }
+            />
 
-          <Pressable
-            style={[styles.button, isSubmitting && styles.buttonDisabled]}
-            onPress={() => handleSubmit()}
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? (
-              <ActivityIndicator color="white" />
-            ) : (
-              <Text style={styles.buttonText}>Create Account</Text>
-            )}
-          </Pressable>
+            <Pressable
+              style={[styles.button, isSubmitting && styles.buttonDisabled]}
+              onPress={() => handleSubmit()}
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? (
+                <ActivityIndicator color="white" />
+              ) : (
+                <Text style={styles.buttonText}>Create Account</Text>
+              )}
+            </Pressable>
 
-          {status && <FormError message={status} />}
-        </View>
-      )}
-    </Formik>
+            {status && <FormError message={status} />}
+          </View>
+        )}
+      </Formik>
+    </SafeAreaView>
   );
 }
 
