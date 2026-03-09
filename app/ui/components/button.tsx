@@ -1,10 +1,12 @@
-import { Pressable, StyleSheet, Text } from "react-native";
+import { ActivityIndicator, Pressable, StyleSheet, Text } from "react-native";
 
 type ButtonProps = {
   text: string;
   textColor: string;
   bgColor: string;
   onPress: () => void;
+  isLoading?: boolean;
+  disabled?: boolean;
 };
 
 export default function Button({
@@ -12,23 +14,39 @@ export default function Button({
   textColor,
   bgColor,
   onPress,
+  isLoading,
+  disabled,
 }: ButtonProps) {
   return (
     <Pressable
       onPress={onPress}
-      style={[styles.button, { backgroundColor: bgColor }]}
+      disabled={disabled || isLoading}
+      style={[
+        styles.button,
+        { backgroundColor: bgColor },
+        (disabled || isLoading) && styles.disabled,
+      ]}
     >
-      <Text style={{ color: textColor }}>{text}</Text>
+      {isLoading ? (
+        <ActivityIndicator color={textColor} />
+      ) : (
+        <Text style={{ color: textColor }}>{text}</Text>
+      )}
     </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
   button: {
-    padding: 10,
-    borderRadius: 5,
+    padding: 15,
+    borderRadius: 8,
     borderColor: "black",
     borderWidth: 2,
     alignItems: "center",
+    justifyContent: "center",
+    marginVertical: 10,
+  },
+  disabled: {
+    opacity: 0.6,
   },
 });

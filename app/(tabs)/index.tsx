@@ -24,10 +24,6 @@ export default function Index() {
   const initialValues: LoginValues = { email: "", password: "" };
   const router = useRouter();
 
-  // function fakeLogin(values: LoginValues) {
-  //   throw new Error("Function not implemented.");
-  // }
-
   return (
     <Formik
       initialValues={initialValues}
@@ -35,7 +31,8 @@ export default function Index() {
       onSubmit={async (values, { setStatus }) => {
         setStatus(undefined);
         try {
-          console.log("Logged in!", values);
+          console.log("Form is valid! Data:", values);
+          router.push("/info-form");
         } catch (err) {
           setStatus(
             "Login failed. Please check your credentials and try again.",
@@ -67,19 +64,34 @@ export default function Index() {
             onBlur={handleBlur("email")}
           ></TextInput>
 
+          <Text>Password</Text>
+          <TextInput
+            style={styles.label}
+            placeholder="Enter your password"
+            secureTextEntry
+            value={values.password}
+            onChangeText={handleChange("password")}
+            onBlur={handleBlur("password")}
+          ></TextInput>
+          <FormError message={touched.password ? errors.password : undefined} />
+
           <Button
             text="Sign In"
             textColor="black"
             bgColor="pink"
-            onPress={() => router.push("/info-form")}
+            onPress={handleSubmit}
+            isLoading={isSubmitting}
           />
-          <FormError message={touched.email ? errors.email : undefined} />
+          {/* Global Error */}
+          {status && <FormError message={status} />}
         </View>
       )}
     </Formik>
   );
 }
+
 // add in styles.
 const styles = StyleSheet.create({
   input: {},
+  label: {},
 });
