@@ -10,7 +10,7 @@ import {
 // import { SafeAreaView } from "react-native-safe-area-context";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import FormError from "../ui/components/form-error";
+import FormError from "../ui/components/FormError";
 
 type LoginValues = {
   email: string;
@@ -38,7 +38,7 @@ export default function Index() {
         setStatus(undefined);
         try {
           console.log("Form is valid! Data:", values);
-          router.push("/info-form");
+          router.push("/infoForm");
         } catch (err) {
           setStatus(
             "Login failed. Please check your credentials and try again.",
