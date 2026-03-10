@@ -1,4 +1,3 @@
-import { useRouter } from "expo-router";
 import { Formik } from "formik";
 import {
   ActivityIndicator,
@@ -11,7 +10,7 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as Yup from "yup";
-import FormError from "../ui/components/FormError";
+import FormError from "../../src/ui/components/FormError";
 
 type LoginValues = {
   email: string;
@@ -29,7 +28,6 @@ const loginSchema = Yup.object({
 
 export default function Index() {
   const initialValues: LoginValues = { email: "", password: "" };
-  const router = useRouter();
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -128,6 +126,7 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: "700",
     marginBottom: 10,
+    paddingVertical: 35,
   },
   label: {
     fontSize: 14,

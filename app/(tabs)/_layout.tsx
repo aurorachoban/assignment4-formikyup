@@ -24,8 +24,9 @@ export default function TabLayout() {
       />
 
       <Tabs.Screen
-        name="sign-up"
+        name="signUp"
         options={{
+          headerShown: false,
           tabBarIcon: ({ color }) => (
             <Feather name="user-plus" size={24} color={color} />
           ),
@@ -33,10 +34,11 @@ export default function TabLayout() {
       />
 
       <Tabs.Screen
-        name="info-form"
+        name="infoForm"
         options={{
+          headerShown: false,
           tabBarIcon: ({ color }) => (
-            <FontAwesome name="wpforms" size={24} color="black" />
+            <FontAwesome name="wpforms" size={24} color={color} />
           ),
         }}
       />
