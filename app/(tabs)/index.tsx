@@ -1,9 +1,15 @@
 import { useRouter } from "expo-router";
-import { StyleSheet, Text, TextInput, View } from "react-native";
+import {
+  ActivityIndicator,
+  Pressable,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
 // import { SafeAreaView } from "react-native-safe-area-context";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import Button from "../ui/components/button";
 import FormError from "../ui/components/form-error";
 
 type LoginValues = {
@@ -50,10 +56,10 @@ export default function Index() {
         isSubmitting,
         status,
       }) => (
-        <View>
-          <Text>Sign In</Text>
+        <View style={styles.container}>
+          <Text style={styles.title}>Sign In</Text>
 
-          <Text>Email</Text>
+          <Text style={styles.label}>Email</Text>
           <TextInput
             style={styles.input}
             placeholder="Enter your email"
@@ -64,9 +70,9 @@ export default function Index() {
             onBlur={handleBlur("email")}
           ></TextInput>
 
-          <Text>Password</Text>
+          <Text style={styles.label}>Password</Text>
           <TextInput
-            style={styles.label}
+            style={styles.input}
             placeholder="Enter your password"
             secureTextEntry
             value={values.password}
@@ -75,13 +81,18 @@ export default function Index() {
           ></TextInput>
           <FormError message={touched.password ? errors.password : undefined} />
 
-          <Button
-            text="Sign In"
-            textColor="black"
-            bgColor="pink"
-            onPress={handleSubmit}
-            isLoading={isSubmitting}
-          />
+          <Pressable
+            style={[styles.button, isSubmitting && styles.buttonDisabled]}
+            onPress={() => handleSubmit()}
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? (
+              <ActivityIndicator />
+            ) : (
+              <Text style={styles.buttonText}>Sign In</Text>
+            )}
+          </Pressable>
+
           {/* Global Error */}
           {status && <FormError message={status} />}
         </View>
@@ -90,8 +101,43 @@ export default function Index() {
   );
 }
 
-// add in styles.
 const styles = StyleSheet.create({
-  input: {},
-  label: {},
+  container: {
+    padding: 16,
+    gap: 10,
+  },
+  title: {
+    fontSize: 28,
+    fontWeight: "700",
+    marginBottom: 10,
+  },
+  label: {
+    fontSize: 14,
+    fontWeight: "600",
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 8,
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+  },
+  button: {
+    width: "100%",
+    borderColor: "black",
+    borderWidth: 1,
+    borderRadius: 8,
+    padding: 8,
+    marginTop: 10,
+    backgroundColor: "black",
+  },
+  buttonDisabled: {
+    opacity: 0.6,
+  },
+  buttonText: {
+    textAlign: "center",
+    color: "white",
+    fontSize: 15,
+    fontWeight: "700",
+  },
 });
