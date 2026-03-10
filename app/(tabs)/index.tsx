@@ -2,6 +2,7 @@ import { useRouter } from "expo-router";
 import { Formik } from "formik";
 import {
   ActivityIndicator,
+  Alert,
   Pressable,
   StyleSheet,
   Text,
@@ -31,19 +32,31 @@ export default function Index() {
   const router = useRouter();
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.safeArea}>
       <Formik
         initialValues={initialValues}
         validationSchema={loginSchema}
-        onSubmit={async (values, { setStatus }) => {
+        onSubmit={async (values, { setStatus, resetForm }) => {
           setStatus(undefined);
           try {
             console.log("Form is valid! Data:", values);
-            router.push("/infoForm");
-          } catch (err) {
-            setStatus(
-              "Login failed. Please check your credentials and try again.",
+
+            // Create the pop-up
+            Alert.alert(
+              "Login Successful",
+              "Welcome back! You have successfully signed in.",
+              [
+                {
+                  text: "OK",
+                  onPress: () => {
+                    console.log("User clicked OK");
+                    resetForm(); // Clears the inputs after successful login.
+                  },
+                },
+              ],
             );
+          } catch (err) {
+            setStatus("Login failed. Please check your credentials.");
           }
         }}
       >
@@ -70,6 +83,7 @@ export default function Index() {
               onChangeText={handleChange("email")}
               onBlur={handleBlur("email")}
             ></TextInput>
+            <FormError message={touched.email ? errors.email : undefined} />
 
             <Text style={styles.label}>Password</Text>
             <TextInput
@@ -143,5 +157,9 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 15,
     fontWeight: "700",
+  },
+  safeArea: {
+    flex: 1,
+    backgroundColor: "white",
   },
 });
