@@ -1,6 +1,7 @@
 import { Formik } from "formik";
 import {
   ActivityIndicator,
+  Alert,
   Pressable,
   StyleSheet,
   Text,
@@ -47,10 +48,12 @@ export default function SignUpScreen() {
       <Formik
         initialValues={initialValues}
         validationSchema={signUpSchema}
-        onSubmit={async (values, { setStatus }) => {
+        onSubmit={async (values, { setStatus, resetForm }) => {
           setStatus(undefined);
           try {
             console.log("Signed up!", values);
+            Alert.alert("Success", "Account Created!");
+            resetForm();
           } catch (err) {
             setStatus("Something went wrong. Please try again.");
           }
